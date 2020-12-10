@@ -95,7 +95,7 @@ Flags:
 | 19 | greenplum_cluster_total_connections_per_user | Gauge |	usename |	int |	每个账号的total连接数	| select client_addr, count(*) total, count(*) filter(where current_query='<IDLE>') idle, count(*) filter(where current_query<>'<IDLE>') active from pg_stat_activity group by 1; |ALL|
 | 20 | greenplum_cluster_idle_connections_per_user | Gauge | usename | int | 每个账号的idle连接数 | 同上 |ALL|
 | 21 | greenplum_cluster_active_connections_per_user | Gauge | usename | int | 每个账号的active连接数 | 同上 |ALL|
-| 22 | greenplum_cluster_config_last_load_time_seconds | Gauge	| - | int | 系统配置加载时间 |	SELECT pg_conf_load_time()  |Only GPOSS6 and GPDB6
+| 22 | greenplum_cluster_config_last_load_time_seconds | Gauge	| - | int | 系统配置加载时间 |	SELECT pg_conf_load_time()  |Only GPOSS6 and GPDB6|
 | 23 | greenplum_node_database_name_mb_size | Gauge | dbname | MB | 每个数据库占用的存储空间大小 |  SELECT dfhostname as segment_hostname,sum(dfspace)/count(dfspace)/(1024*1024) as segment_disk_free_gb from gp_toolkit.gp_disk_free GROUP BY dfhostname |ALL|
 | 24 | greenplum_node_database_table_total_count | Gauge | dbname | - | 每个数据库内表的总数量 | SELECT count(*) as total from information_schema.tables where table_schema not in ('gp_toolkit','information_schema','pg_catalog');  |ALL|
 | 25 | greenplum_exporter_total_scraped | Counter	| -| int | - | - |ALL|
@@ -109,6 +109,9 @@ Flags:
 
 ### 4.声明：
 
-- 本项目在 https://github.com/tangyibo/greenplum_exporter 基础上进行了GPDB多个版本的适配、部分修正，在此对原作者表示感谢
+- 本项目在 https://github.com/tangyibo/greenplum_exporter 基础上进行开发，部分修改如下：
+    - 原作者repo中分别针对gpdb5/6做了不同的分支，这里秉承简洁的原则，进行了GPDB多个版本的合并，您可以通过一个程序采集不同版本GPDB的数据
+    - 部分修正
+    - 在此对原作者表示感谢
 - 如果您在使用过程中有任何疑问，可以在cn.greenplum.org/askgp上提问并@阿福，咨询类问题也可以直接在Greenplum官方技术微信群中@阿福
 - 如果本项目有帮助到您，麻烦您**star一下**～
