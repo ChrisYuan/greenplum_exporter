@@ -35,7 +35,7 @@ export GPDB_DATA_SOURCE_URL=postgres://gpadmin:password@192.168.0.100:5432/postg
 ./greenplum_exporter --web.listen-address="0.0.0.0:5433" --web.telemetry-path="/metrics" --log.level=error --greenplumVersion=gposs6
 ```
 
-服务启动后，访问监控指标的URL地址： *http://127.0.0.1:5433/metrics* 确定是否已经开始正常采集指标
+服务启动后，访问监控指标的URL地址： *http://IP:PORT/metrics* 确定是否已经开始正常采集指标
 
 **其中有几点需要注意：**
 - 环境变量GPDB_DATA_SOURCE_URL指定了连接Greenplum数据库的连接串（请使用gpadmin账号连接postgres库），该连接串以postgres://为前缀，具体格式如下：
