@@ -33,7 +33,7 @@ const (
                'get_lock'
     END lock_satus
      , pg_stat_activity.current_query
-     , least(query_start,xact_start) start_time
+     , coalesce(least(query_start,xact_start),'1970-01-01 00:00:00') start_time
      , count(*)::float
 FROM pg_locks
          JOIN pg_database ON pg_locks.database=pg_database.oid
@@ -61,7 +61,7 @@ ORDER BY start_time;
 							'get_lock'
 					END lock_satus
 			 , pg_stat_activity.query
-			 , least(query_start,xact_start) start_time
+     		 , coalesce(least(query_start,xact_start),'1970-01-01 00:00:00') start_time
 			 , count(*)::float
 		  FROM pg_locks
 		  JOIN pg_database ON pg_locks.database=pg_database.oid
