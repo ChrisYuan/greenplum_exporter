@@ -43,6 +43,30 @@ export GPDB_DATA_SOURCE_URL=postgres://gpadmin:password@192.168.0.100:5432/postg
 postgres://gpadmin:password@192.168.0.100:5432/postgres?sslmode=disable
 postgres://[数据库连接账号，必须为gpadmin]:[账号密码，即gpadmin的密码]@[数据库的IP地址]:[数据库端口号]/[数据库名称，必须为postgres]?[参数名]=[参数值]&[参数名]=[参数值]
 ```
+- 如果环境变量GPDB_DATA_SOURCE_URL中的password含有以下特殊字符，请采用URL编码值替换，否则会报URL无效的错误；
+
+|特殊字符|URL编码值|
+|----|----|
+|空格|%20|
+|"|%22|
+|#|%23|
+|%|%25|
+|&|%26|
+|(|%28|
+|)|%29|
+|+|%2B|
+|,|%2C|
+|/|%2F|
+|:|%3A|
+|;|%3B|
+|<|%3C|
+|=|%3D|
+|>|%3E|
+|?|%3F|
+|@|%4o|
+|\|%5C|
+|管道符|%7C|
+
 - --web.listen-address如果不定义，默认端口为5433。详见帮助
 - --web.telemetry-path如果不定义，默认为/metrics。详见帮助
 - --greenplumVersion如果不定义，默认为gposs6，其他选项还有：gposs5,gpdb6,gpdb5。详见帮助

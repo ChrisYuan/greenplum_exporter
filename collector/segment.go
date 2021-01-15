@@ -82,7 +82,7 @@ func (segmentScraper5) Scrape(db *sql.DB, ch chan<- prometheus.Metric) error {
 
 func scrapeSegmentConfig6(db *sql.DB, ch chan<- prometheus.Metric) error {
 	ctx := context.Background()
-	ctx, cancel := context.WithTimeout(ctx, time.Second*2)
+	ctx, cancel := context.WithTimeout(ctx, time.Second*10)
 	defer cancel()
 
 	logger.Infof("Query Database: %s", segmentConfigSql6)
@@ -111,7 +111,7 @@ func scrapeSegmentConfig6(db *sql.DB, ch chan<- prometheus.Metric) error {
 
 func scrapeSegmentConfig5(db *sql.DB, ch chan<- prometheus.Metric) error {
 	ctx := context.Background()
-	ctx, cancel := context.WithTimeout(ctx, time.Second*2)
+	ctx, cancel := context.WithTimeout(ctx, time.Second*10)
 	defer cancel()
 
 	logger.Infof("Query Database: %s", segmentConfigSql5)
@@ -140,7 +140,7 @@ func scrapeSegmentConfig5(db *sql.DB, ch chan<- prometheus.Metric) error {
 
 func scrapeSegmentDiskFree(db *sql.DB, ch chan<- prometheus.Metric) error {
 	ctx := context.Background()
-	ctx, cancel := context.WithTimeout(ctx, time.Second*2)
+	ctx, cancel := context.WithTimeout(ctx, time.Second*10)
 	defer cancel()
 	logger.Infof("Query Database: %s", segmentDiskFreeSizeSql)
 	rows, err := db.QueryContext(ctx, segmentDiskFreeSizeSql)
