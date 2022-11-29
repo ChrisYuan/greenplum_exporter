@@ -48,7 +48,7 @@ func (usersScraper) Scrape(db *sql.DB, ch chan<- prometheus.Metric) error {
 	}
 	defer rows.Close()
 	errs := make([]error, 0)
-	count := 1
+	count := 0
 	for rows.Next() {
 		var username string
 		err := rows.Scan(&username)
